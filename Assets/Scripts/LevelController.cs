@@ -40,6 +40,7 @@ public class LevelController : MonoBehaviour
     IEnumerator HandleWinCondition()
     {
         AudioSource winAudio = GetComponent<AudioSource>();
+        winAudio.volume = PlayerPrefsController.GetMasterVolume();
         winAudio.Play();
         winLabel.SetActive(true);
         yield return new WaitForSeconds(winAudio.clip.length);

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsController : MonoBehaviour
+public class PlayerPrefsController
 {
     const string MASTER_VOLUME_KEY = "master volume";
     const string DIFFICULTY_KEY = "difficulty";
 
     const float MIN_VOLUME = 0f;
-    const float MIN_VOLUME = 1f;
+    const float MAX_VOLUME = 1f;
 
     public static void SetMasterVolume(float volume)
     {

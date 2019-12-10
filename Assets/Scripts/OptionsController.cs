@@ -16,17 +16,17 @@ public class OptionsController : MonoBehaviour
         musicPlayer = FindObjectOfType<MusicPlayer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateVolume()
     {
-        if (musicPlayer)
+        AudioListener.volume = volumeSlider.value;
+    /*    if (musicPlayer)
         {
             musicPlayer.SetVolume(volumeSlider.value);
         }
         else
         {
             Debug.LogWarning("No Music Player object");
-        }
+        }*/
     }
 
     public void SaveOptions()

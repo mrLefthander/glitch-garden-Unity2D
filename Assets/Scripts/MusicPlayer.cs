@@ -8,7 +8,15 @@ public class MusicPlayer : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(this);
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            gameObject.SetActive(false);
+            Destroy(this);
+        }
+        else
+        {
+            DontDestroyOnLoad(this);
+        }
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefsController.GetMasterVolume();
     }

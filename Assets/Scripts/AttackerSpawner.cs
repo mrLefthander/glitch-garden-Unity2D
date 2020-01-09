@@ -33,7 +33,6 @@ public class AttackerSpawner : MonoBehaviour
             Attacker newAttacker =
                         Instantiate(attackerPrefab, transform.position, transform.rotation) as Attacker;
             newAttacker.transform.parent = transform;
-            levelController.AttackerSpawned();
         }
     }
 }

@@ -5,13 +5,21 @@ using UnityEngine.UI;
 
 public class BaseLivesManager : MonoBehaviour
 {
-    [SerializeField] int lives = 1;
+    [SerializeField] float baseLives = 1f;
+    float lives = 1f;
 
     Text livesText;
     void Start()
     {
+        ApplyDifficulty();
         livesText = GetComponent<Text>();
         UpdateDisplay();
+    }
+
+    private void ApplyDifficulty()
+    {
+        lives = baseLives - Mathf.Round(baseLives * PlayerPrefsController.GetDifficulty());
+        lives = lives < 1 ? 1 : lives;
     }
 
     private void UpdateDisplay()
@@ -19,14 +27,14 @@ public class BaseLivesManager : MonoBehaviour
         livesText.text = lives.ToString();
     }
 
-    public void SpendLives(int amount)
+    public void SpendLives(float amount)
     {
         if (amount <= lives)
         {
             lives -= amount;
             UpdateDisplay();
         }
-        if(lives <= 0)
+        if(lives <= 0f)
         {
             FindObjectOfType<LevelController>().HandleLoseCondition();
         }

@@ -28,11 +28,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        if (gameObject.layer == 9)
-        {
-            levelController.AttackerKilled();
-        }
-        else if (gameObject.layer == 8)
+        if (gameObject.layer == 8)
         {
             defenderSpawner.RemoveDefenderFromList(gameObject.GetComponent<Defender>());
         }

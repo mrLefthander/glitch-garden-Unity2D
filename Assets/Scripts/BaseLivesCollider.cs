@@ -15,7 +15,9 @@ public class BaseLivesCollider : MonoBehaviour
         var otherObject = otherCollider.gameObject;
         if (otherObject.GetComponent<Attacker>())
         {
-            baseLives.SpendLives(1);
+            baseLives.SpendLives(1f);
         }
+        gameObject.SetActive(otherObject);
+        Destroy(otherObject);
     }
 }

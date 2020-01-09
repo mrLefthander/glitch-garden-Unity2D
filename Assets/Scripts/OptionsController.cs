@@ -6,36 +6,36 @@ using UnityEngine.UI;
 public class OptionsController : MonoBehaviour
 {
     [SerializeField] Slider volumeSlider;
-    [SerializeField] float defaultVolume = 0.4f;
+    [SerializeField] Slider difficultySlider;
 
-    MusicPlayer musicPlayer;
+    [SerializeField] float defaultVolume = 0.4f;
+    [SerializeField] float defaultDifficulty = 0f;
 
     void Start()
     {
+        difficultySlider.value = PlayerPrefsController.GetDifficulty();
         volumeSlider.value = PlayerPrefsController.GetMasterVolume();
-        musicPlayer = FindObjectOfType<MusicPlayer>();
     }
 
     public void UpdateVolume()
     {
         AudioListener.volume = volumeSlider.value;
-    /*    if (musicPlayer)
-        {
-            musicPlayer.SetVolume(volumeSlider.value);
-        }
-        else
-        {
-            Debug.LogWarning("No Music Player object");
-        }*/
+    }
+
+    public void UpdateDifficulty()
+    {
+        PlayerPrefsController.SetDifficulty(difficultySlider.value);
     }
 
     public void SaveOptions()
     {
         PlayerPrefsController.SetMasterVolume(volumeSlider.value);
+        PlayerPrefsController.SetDifficulty(difficultySlider.value);
     }
 
     public void SetDefaults()
     {
         volumeSlider.value = defaultVolume;
+        difficultySlider.value = defaultDifficulty;
     }
 }

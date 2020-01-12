@@ -18,7 +18,7 @@ public class BaseLivesManager : MonoBehaviour
 
     private void ApplyDifficulty()
     {
-        lives = baseLives - Mathf.Round(baseLives * PlayerPrefsController.GetDifficulty());
+        lives = Mathf.Round(baseLives / PlayerPrefsController.GetDifficulty());
         lives = lives < 1 ? 1 : lives;
     }
 

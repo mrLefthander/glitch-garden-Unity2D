@@ -6,11 +6,23 @@ using UnityEngine;
 public class DefenderSpawner : MonoBehaviour
 {
     Defender defender;
+    GameObject defenderParent;
+    const string DEFENDER_PARENT_NAME = "Defenders";
     List<Defender> defenderList;
 
     private void Start()
     {
         CreateDefenderList();
+        CreateDefenderParent();
+    }
+
+    private void CreateDefenderParent()
+    {
+        defenderParent = GameObject.Find(DEFENDER_PARENT_NAME);
+        if (!defenderParent)
+        {
+            defenderParent = new GameObject(DEFENDER_PARENT_NAME);
+        }
     }
 
     public void OnMouseDown()
@@ -31,7 +43,7 @@ public class DefenderSpawner : MonoBehaviour
         if (IsSquareEmptyAt(gridPos))
         {
             var starDisplay = FindObjectOfType<StarDisplay>();
-            int defenderCost = defender.GerStarCost();
+            int defenderCost = defender.GetStarCost();
             if (starDisplay.HaveEnoughtStars(defenderCost))
             {
                 SpawnDefender(gridPos);
@@ -71,6 +83,7 @@ public class DefenderSpawner : MonoBehaviour
     private void SpawnDefender(Vector2 coordinates)
     {
         Defender newDefender = Instantiate(defender, coordinates, Quaternion.identity) as Defender;
+        newDefender.transform.parent = defenderParent.transform;
         defenderList.Add(newDefender);
     }
 
